@@ -1,13 +1,11 @@
 pipeline {
    
     agent any
-
-tools {
-jdk "OpenJDK8"
-}
-
+    tools {
+            jdk "OpenJDK8"
+         }
     stages {
-        stage ('Compile Stage') {
+        stage ('Compile') {
 
             steps {
                 withMaven(maven : 'Maven3') {
@@ -15,8 +13,7 @@ jdk "OpenJDK8"
                 }
             }
         }
-
-        stage ('Testing Stage') {
+        stage ('Testing') {
 
             steps {
                 withMaven(maven : 'Maven3') {
@@ -24,22 +21,20 @@ jdk "OpenJDK8"
                 }
             }
         }
-
-        stage('Maven Install') {
+        stage('Install Maven Package') {
             steps {
                 withMaven(maven : 'Maven3') {
                     sh 'mvn package -DskipTests'
-                }
-                
+                } 
             }
         }
-        stage('Docker Build') {
+        stage('Build Docker Image') {
            
             steps {
                  sh 'docker build -t myassignment.jfrog.io/docker-local/docker-local:assignment_0227 .'
             }
         }
-        stage('Publish Docker Image') {
+        stage('Push Docker Image') {
            
             steps {
                  script {
