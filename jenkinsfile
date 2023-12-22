@@ -16,7 +16,7 @@ pipeline {
                     jf 'mvn-config --repo-resolve-releases libs-release --repo-resolve-snapshots libs-snapshots --repo-deploy-releases libs-release-local --repo-deploy-snapshots libs-snapshot-local'
 
                     //jf 'mvn -f pom.xml clean compile'
-                    //jf 'mvn clean deploy'
+                    jf 'mvn -f pom.xml clean deploy'
             }
 
         }
