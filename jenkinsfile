@@ -5,7 +5,7 @@ pipeline {
          PATH = '/usr/bin:$PATH'
     }
     tools {
-            jdk "OpenJDK8"
+            jdk "OpenJDK11"
             jfrog 'jfrog-cli'
          }
 
