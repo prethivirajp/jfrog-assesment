@@ -1,7 +1,9 @@
 pipeline {
    
     agent any
-
+    environment {
+         PATH = '/usr/bin:$PATH'
+    }
     tools {
             jdk "OpenJDK8"
             jfrog 'jfrog-cli'
