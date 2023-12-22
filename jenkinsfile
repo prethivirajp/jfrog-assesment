@@ -10,9 +10,7 @@ pipeline {
     stages {
         stage ('Compile') {
             steps {
-                {
                     jf 'mvn clean compile'
-                }
             }
         }
         stage ('Testing') {
