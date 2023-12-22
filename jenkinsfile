@@ -12,7 +12,9 @@ pipeline {
     stages {
         stage ('Compile') {
             steps {
-                  mvn clean compile
+               withMaven(maven : 'Maven3') {
+                    sh 'mvn clean compile'
+                }
             }
         }
         stage ('Testing') {
