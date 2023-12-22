@@ -12,10 +12,9 @@ pipeline {
     stages {
         stage ('Compile') {
             steps {
-                    // Configure Maven project's repositories
-                    jf 'mvn-config --repo-resolve-releases libs-release --repo-deploy-releases libs-release-local'
-
-                    jf 'mvn deploy'
+                   withMaven(maven : 'Maven3') {
+                    sh 'mvn clean compile'
+                } 
             }
         }
         stage ('Testing') {
