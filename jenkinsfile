@@ -4,7 +4,7 @@ pipeline {
     stage('Checkout') {
       steps {
         //git branch: 'main', url: 'https://github.com/spring-projects/spring-petclinic.git'
-        git branch: 'main', url: 'https://github.com/prakan2/JFrog-assesment.git'
+        git branch: 'main', url: 'https://github.com/prethivirajp/jfrog-assesment.git'
         echo "entered into the spring" 
        }
     }
