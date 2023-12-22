@@ -16,7 +16,11 @@ pipeline {
                     jf 'mvn-config --repo-resolve-releases libs-release --repo-resolve-snapshots libs-snapshots --repo-deploy-releases libs-release-local --repo-deploy-snapshots libs-snapshot-local'
 
                     //jf 'mvn -f pom.xml clean compile'
-                    jf 'mvn -f pom.xml clean deploy'
+                    //jf 'mvn -f pom.xml clean deploy'
+
+        sh "./mvnw package"
+        echo "maven packaging complete"
+   
             }
 
         }
