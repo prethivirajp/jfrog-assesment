@@ -140,6 +140,13 @@
     </dependency>
 
   </dependencies>
+  <distributionManagement>
+    <repository>
+        <id>central</id>
+        <name>a0jrurqc8pbgv-artifactory-primary-0-releases</name>
+        <url>https://assesment1.jfrog.io/artifactory/maventest-libs-release</url>
+    </repository>
+</distributionManagement>
 
   <build>
     <plugins>
