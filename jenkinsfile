@@ -2,6 +2,10 @@ pipeline {
    
     agent any
 
+tools {
+jdk "OpenJDK8"
+}
+
     stages {
         stage ('Compile Stage') {
 
