@@ -1,15 +1,17 @@
 pipeline {
    
     agent any
+
     tools {
             jdk "OpenJDK8"
+            jfrog 'jfrog-cli'
          }
+
     stages {
         stage ('Compile') {
-
             steps {
-                withMaven(maven : 'Maven3') {
-                    sh 'mvn clean compile'
+                {
+                    jf 'mvn clean compile'
                 }
             }
         }
