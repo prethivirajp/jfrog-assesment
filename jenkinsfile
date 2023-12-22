@@ -10,19 +10,42 @@ pipeline {
          }
 
     stages {
-        stage ('Compile') {
+     stage ('Artifactory Configuration') {
             steps {
-                    // Configure Maven project's repositories
-                    jf 'mvn-config --repo-resolve-releases libs-release --repo-resolve-snapshots libs-snapshots --repo-deploy-releases libs-release-local --repo-deploy-snapshots libs-snapshot-local'
-
-                    //jf 'mvn -f pom.xml clean compile'
-                    //jf 'mvn -f pom.xml clean deploy'
-
-        sh "./mvnw package"
-        echo "maven packaging complete"
-   
+                rtServer (
+                    id: "devsecopsunicloud",
+                    url: "https://assesment1.jfrog.io/artifactory",
+                    credentialsId: "JF_ACCESS_TOKEN"
+                )
+ 
+                rtMavenResolver (
+                    id: 'maven-resolver',
+                    //serverId: 'devsecopsunicloud',
+                    releaseRepo: 'mvnassesment-libs-release',
+                    snapshotRepo: 'mvnassesment-libs-snapshot'
+                )  
+                 
+                rtMavenDeployer (
+                    id: 'maven-deployer',
+                    //serverId: 'devsecopsunicloud',
+                    releaseRepo: 'mvnassesment-libs-release-local',
+                    snapshotRepo: 'mvnassesment-libs-snapshot-local',
+                    threads: 6,
+                    properties: ['BinaryPurpose=Technical-BlogPost', 'Team=DevOps-Acceleration']
+                )
             }
-
+        }
+        stage('Build Maven Project') {
+            steps {
+                rtMavenRun (
+                    tool: 'maven',
+                    pom: 'pom.xml',
+                    goals: '-U clean install',
+                    opts: '-Xms1024m -Xmx4096m',
+                    deployerId: "maven-deployer",
+                    resolverId: "maven-resolver"
+                )
+            }
         }
         stage ('Testing') {
 
