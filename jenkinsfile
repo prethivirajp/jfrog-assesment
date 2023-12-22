@@ -12,10 +12,7 @@ pipeline {
     stages {
         stage ('Compile') {
             steps {
-                    // Configure Maven project's repositories
-                    jf 'mvn-config --maventest-libs-release'
-
-                    jf 'mvn clean compile'
+                  mvn clean compile
             }
         }
         stage ('Testing') {
