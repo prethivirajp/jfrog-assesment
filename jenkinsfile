@@ -1,52 +1,53 @@
 pipeline {
-   agent any
-   stages {
-    stage('Checkout') {
-      steps {
-        //git branch: 'main', url: 'https://github.com/spring-projects/spring-petclinic.git'
-        git branch: 'main', url: 'https://github.com/prethivirajp/jfrog-assesment.git'
-        echo "entered into the spring" 
-       }
+   
+    agent any
+    environment {
+         PATH = '/usr/bin:$PATH'
     }
-    stage("get inside the folder") {
-      steps {
-        sh "ls -la"
-        echo "entered the workspace"
-        sh "chmod 755 gradlew"
-        sh "chmod 755 mvnw"
-        echo " permissions given to maven and gradle"
-      }
+    tools {
+            jdk "OpenJDK8"
+            jfrog 'jfrog-cli'
+         }
+
+    stages {
+        stage ('Compile') {
+            steps {
+                    // Configure Maven project's repositories
+                    jf 'mvn-config --repo-resolve-releases libs-release --repo-resolve-snapshots libs-snapshots --repo-deploy-releases libs-release-local --repo-deploy-snapshots libs-snapshot-local'
+
+                    jf 'mvn clean compile'
+            }
+        }
+        stage ('Testing') {
+
+            steps {
+                withMaven(maven : 'Maven3') {
+                    sh 'mvn test'
+                }
+            }
+        }
+        stage('Install Maven Package') {
+            steps {
+                withMaven(maven : 'Maven3') {
+                    sh 'mvn package -DskipTests'
+                } 
+            }
+        }
+        stage('Build Docker Image') {
+           
+            steps {
+                 sh 'docker build -t myassignment.jfrog.io/docker-local/docker-local:assignment_0227 .'
+            }
+        }
+        stage('Push Docker Image') {
+           
+            steps {
+                 script {
+                    docker.withRegistry( 'https://myassignment.jfrog.io/docker-local', 'JfrogAws_Id' ) { 
+                      sh 'docker push myassignment.jfrog.io/docker-local/docker-local:assignment_0227'    
+                    } 
+                 }
+            }
+        }
     }
-    stage("maven clean") {
-      steps {
-        sh "./mvnw clean"
-        echo "maven clean complete"
-      }
-    }
-    stage("maven build") {
-      steps {
-        sh "./mvnw install"
-        echo "maven install complete"
-      }
-    }
-    stage("maven package") {
-      steps {
-        sh "./mvnw package"
-        echo "maven packaging complete"
-      }
-    }
-    stage("running the jar file") {
-      steps {
-        //sh "java -jar target/*.jar"
-        echo "running the packaged jar file"
-      }
-    }
-    stage("Building docker image") {
-      steps {
-        //sh "sudo chmod 666 /var/run/docker.sock"
-        sh "docker build -t assesment_jenkins ."
-        echo "docker image generated"
-      }
-    }
-  }
 }
