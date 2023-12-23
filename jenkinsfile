@@ -2,34 +2,30 @@ pipeline {
    
     agent any
     environment {
-         PATH = '/usr/bin:$PATH'
+       
+         JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64/
+         MAVEN_HOME=/home/azureuser/apache-maven-3.9.6/
+         PATH=$MAVEN_HOME/bin:$PATH
     }
     tools {
-            jdk "OpenJDK8"
             jfrog 'jfrog-cli'
          }
 
     stages {
         stage ('Compile') {
             steps {
-                    // Configure Maven project's repositories
-                    jf 'mvn-config --repo-resolve-releases libs-release --repo-resolve-snapshots libs-snapshots --repo-deploy-releases libs-release-local --repo-deploy-snapshots libs-snapshot-local'
-
-                    jf 'mvn clean compile'
+               mvn clean compile
             }
         }
         stage ('Testing') {
 
             steps {
-                withMaven(maven : 'Maven3') {
-                    sh 'mvn test'
-                }
+               mvn test
             }
         }
         stage('Install Maven Package') {
             steps {
-                withMaven(maven : 'Maven3') {
-                    sh 'mvn package -DskipTests'
+                mvn install
                 } 
             }
         }
