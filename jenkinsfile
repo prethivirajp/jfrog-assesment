@@ -7,6 +7,9 @@ pipeline {
          MAVEN_HOME = '/home/azureuser/apache-maven-3.9.6/'
          PATH = '$MAVEN_HOME/bin:$PATH'
     }
+    tools {
+         maven 'Maven 3'
+    }
 
     stages {
         stage ('Compile') {
