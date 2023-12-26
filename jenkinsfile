@@ -19,7 +19,7 @@ ypipeline {
         stage ('Compile') {
             steps {
                //sh 'mvn --version'
-               sh 'mvn -X clean deploy'
+               sh 'mvn clean deploy'
             }
         }
     }
