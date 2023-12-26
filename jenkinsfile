@@ -12,6 +12,7 @@ pipeline {
         stage ('Compile') {
             steps {
                sh 'mvn help:effective-settings'
+               sh 'echo ${M2.HOME}/conf/settings.xml'
                sh 'mvn clean compile'
             }
         }
