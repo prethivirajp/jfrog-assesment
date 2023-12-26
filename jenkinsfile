@@ -12,6 +12,11 @@ pipeline {
     }
 
     stages {
+      stage ('Clone') {
+            steps {
+              git clone https://github.com/prethivirajp/jfrog-assesment.git
+            }
+        }
         stage ('Compile') {
             steps {
                sh 'mvn --version'
