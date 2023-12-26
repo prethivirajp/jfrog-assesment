@@ -13,7 +13,7 @@ pipeline {
             steps {
                sh 'mvn help:effective-settings'
                //echo '${M2.HOME}/conf/settings.xml'
-               sh 'mvn clean install'
+               sh 'mvn clean install -s settings.xml'
             }
         }
        stage ('Testing') {
