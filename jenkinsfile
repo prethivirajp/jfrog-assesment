@@ -1,15 +1,8 @@
 pipeline {
-   
     agent any
-    environment {
-         JAVA_HOME = '/usr/lib/jvm/java-17-openjdk-amd64'
-         //JAVA_HOME = '/usr/bin/java/'
-         MAVEN_HOME = '/home/azureuser/.m2/wrapper/dists/apache-maven-3.9.5-bin/'
-         //PATH = '$MAVEN_HOME/bin:$PATH'
+    tools {
+         maven 'Maven3'
     }
-    //tools {
-         //maven 'Maven3'
-    //}
     stages {
       stage ('Clone') {
             steps {
@@ -18,8 +11,7 @@ pipeline {
         }
         stage ('Compile') {
             steps {
-               sh 'mvn --version'
-               //sh 'mvn clean deploy'
+               sh 'mvn clean complie'
             }
         }
     }
