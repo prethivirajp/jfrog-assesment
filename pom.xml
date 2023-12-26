@@ -140,13 +140,6 @@
     </dependency>
 
   </dependencies>
- <distributionManagement>
-    <repository>
-        <id>central</id>
-        <name>a0jrurqc8pbgv-artifactory-primary-0-releases</name>
-        <url>https://assesment1.jfrog.io/artifactory/mvnassesment-libs-release</url>
-    </repository>
-</distributionManagement>
   <build>
     <plugins>
       <plugin>
@@ -439,5 +432,11 @@
       </build>
     </profile>
   </profiles>
-
+ <distributionManagement>
+    <repository>
+        <id>mvnbuild</id>
+        <name>a0jrurqc8pbgv-artifactory-primary-0-releases</name>
+        <url>https://assesment1.jfrog.io/artifactory/mvnassesment-libs-release</url>
+    </repository>
+</distributionManagement>
 </project>
