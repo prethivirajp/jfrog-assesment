@@ -13,7 +13,7 @@ pipeline {
     stages {
       stage ('Clone') {
             steps {
-              git clone 'https://github.com/prethivirajp/jfrog-assesment.git'
+               git branch: 'main', url: 'https://github.com/prethivirajp/jfrog-assesment.git'
             }
         }
         stage ('Compile') {
