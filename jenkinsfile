@@ -1,12 +1,12 @@
 pipeline {
    
     agent any
-    environment {
+    //environment {
          //JAVA_HOME = '/usr/lib/jvm/java-17-openjdk-amd64'
          //JAVA_HOME = '/usr/bin/java/'
-         MAVEN_HOME = '/home/azureuser/.m2/wrapper/dists/apache-maven-3.9.5-bin/32db9c34/apache-maven-3.9.5/'
+         //MAVEN_HOME = '/home/azureuser/.m2/wrapper/dists/apache-maven-3.9.5-bin/32db9c34/apache-maven-3.9.5/'
          //PATH = '$MAVEN_HOME/bin:$PATH'
-    }
+    //}
     tools {
          maven 'Maven3'
     }
@@ -20,35 +20,6 @@ pipeline {
             steps {
                //sh 'mvn --version'
                sh 'mvn - X clean compile'
-            }
-        }
-        stage ('Testing') {
-
-            steps {
-               sh 'mvn test'
-            }
-        }
-        stage('Install Maven Package') {
-            steps {
-                sh 'mvn deploy -s settings.xml'
-                } 
-            }
-        
-        stage('Build Docker Image') {
-           
-            steps {
-                 sh 'docker --version'
-                 sh 'docker build -t myassignment.jfrog.io/docker-local/docker-local:assignment_0227 .'
-            }
-        }
-        stage('Push Docker Image') {
-           
-            steps {
-                 script {
-                    docker.withRegistry( 'https://myassignment.jfrog.io/docker-local', 'JfrogAws_Id' ) { 
-                      sh 'docker push myassignment.jfrog.io/docker-local/docker-local:assignment_0227'    
-                    } 
-                 }
             }
         }
     }
