@@ -25,12 +25,12 @@ pipeline {
         stage ('Testing') {
 
             steps {
-               mvn test
+               sh 'mvn test'
             }
         }
         stage('Install Maven Package') {
             steps {
-                mvn install
+                sh 'mvn install'
                 } 
             }
         
