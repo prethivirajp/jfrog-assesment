@@ -11,7 +11,8 @@ pipeline {
         }
         stage ('Compile') {
             steps {
-               sh 'mvn clean compile -s settings.xml'
+sh 'mvn help:effective-settings'
+               //sh 'mvn clean compile -s settings.xml'
             }
         }
     }
