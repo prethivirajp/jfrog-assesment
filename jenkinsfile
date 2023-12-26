@@ -30,7 +30,7 @@ pipeline {
         }
         stage('Install Maven Package') {
             steps {
-                sh 'mvn package'
+                sh 'mvn deploy'
                 } 
             }
         
