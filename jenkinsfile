@@ -19,7 +19,7 @@ pipeline {
         stage ('Compile') {
             steps {
                //sh 'mvn --version'
-               sh 'mvn - X clean compile'
+               sh 'mvn -X clean compile'
             }
         }
     }
