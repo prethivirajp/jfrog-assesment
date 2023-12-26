@@ -6,9 +6,6 @@ pipeline {
          MAVEN_HOME = '/home/azureuser/apache-maven-3.9.6/'
          PATH = '$MAVEN_HOME/bin:$PATH'
     }
-    tools {
-            //jfrog 'jfrog-cli'
-         }
 
     stages {
         stage ('Compile') {
