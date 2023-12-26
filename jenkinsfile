@@ -1,12 +1,12 @@
 pipeline {
    
     agent any
-    //environment {
+    environment {
          JAVA_HOME = '/usr/lib/jvm/java-17-openjdk-amd64'
          //JAVA_HOME = '/usr/bin/java/'
          //MAVEN_HOME = '/home/azureuser/apache-maven-3.9.6/'
          //PATH = '$MAVEN_HOME/bin:$PATH'
-    //}
+    }
     tools {
          maven 'Maven3'
     }
