@@ -27,14 +27,14 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                 sh 'docker build -t assesment1.jfrog.io/artifactory/docket-petclinic-docker-local/docker-local:myapp .'
+                 sh 'docker build -t assesment1.jfrog.io/docket-petclinic-docker-local/docker-local:latest .'
             }
         }
         stage('Publish to Jfrog') {
             steps {
                  script {
                     docker.withRegistry( 'https://assesment1.jfrog.io/artifactory/docket-petclinic-docker-local', 'JFrog_Creds' ) { 
-                      sh 'docker push assesment1.jfrog.io/artifactory/docket-petclinic-docker-local/docker-local:myapp'    
+                      sh 'docker push assesment1.jfrog.io/docket-petclinic-docker-local/docker-local:latest'    
                     } 
                  }
             }
