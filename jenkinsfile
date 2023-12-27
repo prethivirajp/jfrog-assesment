@@ -29,8 +29,7 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                 //sh 'docker --version'
-                 sh 'docker build -t assesment1.jfrog.io/artifactory/docket-petclinic-docker-local/docker-local:myapp .’
+                 sh 'docker build -t assesment1.jfrog.io/artifactory/docket-petclinic-docker-local/docker-local:myapp .'
             }
         }
     }
